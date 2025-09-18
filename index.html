@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Undangan Pernikahan</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- GANTI BAGIAN INI -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+    /* GANTI BAGIAN :root */
+:root {
+    --bg-color: #0d0d0d;
+    --text-color-white: #e0e0e0;
+    --accent-color-gold: #cfa862;
+    --light-gold: #e2c07c;
+    --bright-gold: #FFD700;
+    --font-arabic: 'Scheherazade New', serif;       /* Lebih modern & elegan untuk Arab */
+    --font-title: 'Playfair Display', serif;        /* Judul modern & timeless */
+    --font-general: 'Inter', sans-serif;            /* Body font paling modern & readable 2025 */
+    --anim-duration: 0.8s;
+    --anim-easing: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+    /* Basic & Mobile-First Styles */
+    body {
+        font-family: var(--font-general);
+        background-color: var(--bg-color);
+        background-image: url('https://images.unsplash.com/photo-1596701198468-19601d3a0889?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        color: var(--text-color-white);
+        max-width: 500px;
+        margin: 0 auto;
+        overflow-x: hidden;
+    }
+
+    .container-undangan {
+        background-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        min-height: 100vh;
+        padding: 2rem 1rem;
+    }
+
+    .text-gold { color: var(--accent-color-gold) !important; }
+    .text-bright-gold { color: var(--bright-gold) !important; }
+    .border-gold { border-color: rgba(207, 168, 98, 0.2) !important; }
+    .font-arabic { font-family: var(--font-arabic); }
+    .font-title { font-family: var(--font-title); }
+    
+    /* ========== ANIMASI BARU ========== */
+.font-arabic {
+    font-family: var(--font-arabic);
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+}
+    /* Fade + Slide Up Animation */
+    .animated-item {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity var(--anim-duration) var(--anim-easing), transform var(--anim-duration) var(--anim-easing);
+        will-change: opacity, transform;
+    }
+    .animated-item.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Staggered Delays */
+    .stagger-delay-1 { transition-delay: 0.1s; }
+    .stagger-delay-2 { transition-delay: 0.2s; }
+    .stagger-delay-3 { transition-delay: 0.3s; }
+    .stagger-delay-4 { transition-delay: 0.4s; }
+    .stagger-delay-5 { transition-delay: 0.5s; }
+    .stagger-delay-6 { transition-delay: 0.6s; }
+
+    /* Shimmer Effect for Gold Text */
+    @keyframes shimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+    .shimmer-gold {
+        background: linear-gradient(90deg, var(--accent-color-gold) 0%, #fff 50%, var(--accent-color-gold) 100%);
+        background-size: 200% 100%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shimmer 3s ease-in-out infinite;
+    }
+
+    /* Bounce Animation */
+    @keyframes bounce-in {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+    .bounce-on-load {
+        animation: bounce-in 1.5s ease-in-out 1s 1;
+        animation-fill-mode: both;
+    }
+
+    /* Scale In Animation */
+    @keyframes scale-in {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+    .scale-in {
+        animation: scale-in 0.6s ease-out forwards;
+    }
+
+    /* Hover Effect for Event Cards */
+    .event-box {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .event-box:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 15px 35px rgba(207, 168, 98, 0.3);
+    }
+
+    /* Pulse Gold for Envelope Button */
+    @keyframes pulse-gold {
+        0% { box-shadow: 0 0 0 0 rgba(207, 168, 98, 0.4); }
+        70% { box-shadow: 0 0 0 15px rgba(207, 168, 98, 0); }
+        100% { box-shadow: 0 0 0 0 rgba(207, 168, 98, 0); }
+    }
+    .amplop-btn {
+        animation: pulse-gold 2s infinite;
+        position: relative;
+        overflow: hidden;
+    }
+    .amplop-btn:hover {
+        animation-play-state: paused;
+        transform: scale(1.05);
+    }
+
+    /* Digital Envelope Modal */
+    .amplop-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.85);
+        backdrop-filter: blur(5px);
+        z-index: 1050;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    .amplop-modal.show {
+        display: flex;
+        opacity: 1;
+    }
+    .amplop-content {
+        background-color: var(--bg-color);
+        border: 1px solid var(--accent-color-gold);
+        padding: 30px;
+        text-align: center;
+        width: 90%;
+        border-radius: 10px;
+        max-width: 400px;
+        transform: scale(0.9);
+        transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity: 0;
+    }
+    .amplop-modal.show .amplop-content {
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    /* Copy Button */
+    .copy-btn {
+        background-color: var(--accent-color-gold);
+        color: var(--bg-color);
+        border: none;
+        padding: 5px 10px;
+        font-size: 14px;
+        margin-left: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    .copy-btn:hover {
+        background-color: var(--light-gold);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(207, 168, 98, 0.4);
+    }
+
+    /* Copy Success Animation */
+    .copy-success {
+        position: relative;
+    }
+    .copy-success::after {
+        content: "✓ Disalin!";
+        position: absolute;
+        top: -30px;
+        right: 0;
+        background: var(--bright-gold);
+        color: var(--bg-color);
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: bold;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        pointer-events: none;
+    }
+    .copy-success.active::after {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Map Container */
+    .map-container {
+        transition: transform 0.3s ease;
+    }
+    .map-container:hover {
+        transform: scale(1.02);
+    }
+
+    /* Optional: Animated Gradient Background Overlay */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, transparent, rgba(207, 168, 98, 0.05), transparent);
+        z-index: -1;
+        pointer-events: none;
+        background-size: 400% 400%;
+        animation: gradientShift 15s ease infinite;
+    }
+    @keyframes gradientShift {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+</style>
+</head>
+<body class="bg-dark text-white">
+
+    <div class="container-fluid container-undangan p-4 p-md-5">
+        
+        <div class="animated-item text-center mb-5">
+            <h2 class="fs-6 fw-light text-uppercase mb-3">Dengan memohon Rahmat dan Ridho Allah SWT</h2>
+            <h1 class="font-arabic display-3 text-gold mb-3">بِسْمِ اللّهِ الرَّحْمَنِ الرَّحِيْمِ</h1>
+            <p class="fst-italic">Assalamu'alaikum Warahmatullahi Wabarakatuh</p>
+        </div>
+
+        <div class="animated-item text-center border-bottom border-gold pb-4 mb-4">
+            <p>Tanpa mengurangi rasa hormat, kami mengundang Bapak/Ibu/Saudara/i untuk menghadiri acara resepsi pernikahan kami:</p>
+            <div class="mt-4">
+<h2 class="font-title display-4 fw-bold text-white mb-0 animated-item stagger-delay-1">Muhamad Zainal Arifin</h2>
+<p class="animated-item stagger-delay-2">Putra dari Bapak Darmuji Dan Ibu Siti Nurhayati</p>
+                <div class="my-3 text-gold fs-2 font-title fw-bold animated-item">&</div>
+<h2 class="font-title display-4 fw-bold text-white mb-0 animated-item stagger-delay-1">Nurrul Lutfiani</h2>
+<p class="animated-item stagger-delay-2">Putri dari Bapak Sapuan Dan Ibu Siti Sholekah</p>
+            </div>
+        </div>
+
+        <div class="animated-item text-center border-bottom border-gold pb-4 mb-4">
+            <p class="font-arabic fs-4 text-gold animated-item">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ</p>
+            <p class="fst-italic small text-white animated-item">"Dan di antara tanda-tanda kebesaran-Nya ialah Dia menciptakan pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tentram kepadanya, dan Dia menjadikan di antamamu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berpikir."<br>(QS. Ar-Rum: 21)</p>
+        </div>
+
+        <div class="animated-item text-center pb-4 mb-4">
+            <h2 class="font-title fs-3 text-gold text-uppercase fw-bold mb-4 animated-item">Waktu & Tempat</h2>
+            <div class="row justify-content-center g-3">
+                <div class="col-12 animated-item">
+                    <div class="p-4 rounded bg-black bg-opacity-25 shadow-sm event-box border border-gold">
+                        <i class="bi bi-person-hearts fs-3 text-gold mb-2 d-block"></i>
+                        <h3 class="font-title fs-4 text-gold mb-2">Acara H-1 Nikah</h3>
+                        <p class="mb-1">Minggu, 19 Oktober 2025</p>
+                        <p class="mb-1">Pukul : -</p>
+                        <p class="small text-white-50">Lokasi: Di rumah<br>RT/01 RW/03,Pojok,Gade</p>
+                    </div>
+                </div>
+               
+            </div>
+
+            <h2 class="font-title fs-3 text-gold text-uppercase fw-bold mt-5 mb-3 animated-item">Lokasi</h2>
+            <div class="map-container rounded-3 overflow-hidden shadow animated-item" style="height: 250px;">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3958.6996324841784!2d111.02021707499875!3d-7.1606819928438865!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zN8KwMDknMzguNSJTIDExMcKwMDEnMjIuMSJF!5e0!3m2!1sid!2sid!4v1758167641491!5m2!1sid!2sid" width="100%" height="100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <div class="animated-item text-center border-bottom border-gold pb-4 mb-4">
+            <p>Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan do'a restu. Atas kehadiran dan do'anya, kami ucapkan terima kasih.</p>
+        </div>
+
+
+
+        <div class="animated-item text-center pt-4">
+            <p class="mb-1">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+            <p class="mb-1">Hormat kami yang berbahagia,</p>
+            <p class="font-title fs-4 fw-bold text-gold">Muhamad Zainal Arifin & Nurrul Lutfiani</p>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script>
+    // Toggle Amplop Modal
+    function toggleAmplop() {
+        const modal = document.getElementById('amplopModal');
+        const content = modal.querySelector('.amplop-content');
+        
+        if (!modal.classList.contains('show')) {
+            modal.style.display = 'flex';
+            setTimeout(() => {
+                modal.classList.add('show');
+                content.classList.add('scale-in');
+            }, 10);
+        } else {
+            modal.classList.remove('show');
+            content.classList.remove('scale-in');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+    }
+
+function copyToClipboard(id) {
+    const element = document.getElementById(id);
+    const textToCopy = element.textContent;
+    const button = element.nextElementSibling;
+
+    navigator.clipboard.writeText(textToCopy).then(() => {
+        // Ubah isi tombol sementara
+        button.innerHTML = "✓ Disalin!";
+        // Balik lagi ke ikon setelah 1.5 detik
+        setTimeout(() => {
+            button.innerHTML = '<i class="bi bi-files"></i>';
+        }, 1500);
+    }).catch(err => {
+        console.error('Gagal menyalin: ', err);
+        alert('Gagal menyalin nomor rekening.');
+    });
+}
+
+
+    // On DOM Load: Animate Items + Bounce Button
+    document.addEventListener('DOMContentLoaded', () => {
+        // Tambahkan bounce ke tombol amplop saat halaman selesai load
+        setTimeout(() => {
+            const amplopBtn = document.querySelector('.amplop-btn');
+            if (amplopBtn) amplopBtn.classList.add('bounce-on-load');
+        }, 800);
+
+        // Intersection Observer untuk animasi scroll
+        const animatedItems = document.querySelectorAll('.animated-item');
+        
+        const observerOptions = {
+            root: null,
+            threshold: 0.15,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        animatedItems.forEach((item, index) => {
+            // Tambahkan delay bertahap
+            item.style.transitionDelay = `${0.1 * (index % 7)}s`;
+            observer.observe(item);
+        });
+    });
+</script>
+</body>
+</html>
